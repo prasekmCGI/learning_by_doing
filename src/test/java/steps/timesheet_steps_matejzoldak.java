@@ -26,7 +26,7 @@ public class timesheet_steps_matejzoldak {
 		
 //		NAVIGATE TO LOGIN PAGE
 		WebDriver browser = DriverUtil.getDriver();
-		browser.get("https://psa-fs.ent.cgi.com/psp/fsprda/?cmd=login&languageCd=ENG");
+		browser.get(".....");
 		
 		
 //		GET the credential data from scenarios
