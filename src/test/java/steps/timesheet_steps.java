@@ -54,21 +54,7 @@ public class timesheet_steps {
 		
 				
 		
-						
-		// click on the login button
-		// buttonLogin.click();
-
-		// submit the login
-		
-		//System.out.println("this is a header of my table: " + data.get(0));
-		//System.out.println("this is a row with my credentials: " + data.get(1));
-		
-		// 
-		
-		//Thread.sleep(8000);
-		
-		//[[Username, Password], [peter.sova, myPassword1]]
-		
+	
 	}
 
 	@And("^User navigates to CGI Timesheet Reports$")
