@@ -30,7 +30,7 @@ public class timesheet_steps_prasekmCGI {
 	public void user_is_logged_in_the_timesheet_application_with_specified_credentails(DataTable credentialsTable ) throws Exception {
 		
 		WebDriver browser = DriverUtil.getDriver();
-		browser.get("https://psa-fs.ent.cgi.com/psp/fsprda/?cmd=login");
+		browser.get("aaaaaa");
 		
 //		 get the credentials data from scenario
 		List<List<String>> data = credentialsTable.raw();
