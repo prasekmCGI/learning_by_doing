@@ -7,4 +7,4 @@ target/
 .classpath
 .project
 *.log
-src/test/java/binaries/classified.txt
+classified.txt
