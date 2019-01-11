@@ -1,8 +1,7 @@
 package steps;
 
-
 import static org.junit.Assert.assertTrue;
-
+import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,21 +11,22 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import framework.DriverUtil;
 import framework.Wrappers;
+import framework.Helpers;
 
 public class timesheet_steps {
 	
 	// get the driver:
 	WebDriver browser = DriverUtil.getDriver();
 	
-	@Given("^User is logged in the timesheet application with specified credentails$")
-	public void user_is_logged_in_the_timesheet_application_with_specified_credentails(DataTable credentialsTable) throws Exception {
+	@Given("^User is logged in the timesheet application$")
+	public void user_is_logged_in_the_timesheet_application() throws Exception {
 	    		
-		// get the credentials data from scenario
-		List<List<String>> data = credentialsTable.raw();
+		// get the url and credentials from the classified.txt file 
+		ArrayList<String> classifiedInfo = Helpers.getClassifiedInformation();
 		
-		String timesheetUrl = data.get(1).get(0);
-		String username = data.get(1).get(1);
-		String password = data.get(1).get(2);
+		String timesheetUrl = classifiedInfo.get(0);
+		String username = classifiedInfo.get(1);
+		String password = classifiedInfo.get(2);
 		
 		// navigate to timesheet login page
 		browser.get(timesheetUrl);

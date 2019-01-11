@@ -1,5 +1,9 @@
 package framework;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -51,5 +55,5 @@ public final class Wrappers {
 		// turn on implicit wait
 		browser.manage().timeouts().implicitlyWait(IMPLICIT_WAIT, TimeUnit.SECONDS);
 	}
-	
+		
 }

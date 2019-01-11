@@ -1,9 +1,18 @@
 # folders
+
 .metadata/
+
 .settings/
+
 target/
 
+
+
 # files
+
 .classpath
+
 .project
+
 *.log
+src/test/java/binaries/classified.txt
