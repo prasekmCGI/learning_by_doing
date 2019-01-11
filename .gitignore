@@ -1,9 +1,9 @@
-# folders
+# ignored folders
 .metadata/
 .settings/
 target/
 
-# files
+# ignored files
 .classpath
 .project
 *.log
