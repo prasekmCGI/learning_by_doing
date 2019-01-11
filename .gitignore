@@ -15,4 +15,3 @@ target/
 .project
 
 *.log
-src/test/java/binaries/classified.txt
