@@ -17,6 +17,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import framework.DriverUtil;
 import framework.Wrappers;
+import framework.Helpers;
 
 public class timesheet_steps_prasekmCGI {
 	
@@ -24,19 +25,20 @@ public class timesheet_steps_prasekmCGI {
 	
 	
 	@Given("^User is logged in the timesheet application with specified credentails$")
-	public void user_is_logged_in_the_timesheet_application_with_specified_credentails(DataTable credentialsTable ) throws Exception {
+	public void user_is_logged_in_the_timesheet_application_with_specified_credentails() throws Exception {
+		
+	
 		
 		WebDriver browser = DriverUtil.getDriver();
-		browser.get("");
 		
-//		 get the credentials data from scenario
-		List<List<String>> data = credentialsTable.raw();
+		// get the url and credentials from the classified.txt file 
+		ArrayList<String> classifiedInfo = Helpers.getClassifiedInformation();
 		
-		String username = data.get(1).get(0);
-		String password = data.get(1).get(1);
-//		System.out.println(data);
-//		(("Username","Password"),("peter.sova","myPassword1")) 
+		String timesheetUrl = classifiedInfo.get(0);
+		String username = classifiedInfo.get(1);
+		String password = classifiedInfo.get(2);
 		
+		browser.get(timesheetUrl);
 		
 		WebElement inputUsername = browser.findElement(By.id("userid"));
 		inputUsername.clear();
