@@ -4,22 +4,19 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import cucumber.runtime.junit.Assertions;
-
-//import runner.DriverUtil;
+import cucumber.api.java.en.When;
 import framework.DriverUtil;
+import framework.Wrappers;
 
 public class timesheet_steps_prasekmCGI {
 	
@@ -30,7 +27,7 @@ public class timesheet_steps_prasekmCGI {
 	public void user_is_logged_in_the_timesheet_application_with_specified_credentails(DataTable credentialsTable ) throws Exception {
 		
 		WebDriver browser = DriverUtil.getDriver();
-		browser.get("aaaaaa");
+		browser.get("");
 		
 //		 get the credentials data from scenario
 		List<List<String>> data = credentialsTable.raw();
@@ -57,27 +54,17 @@ public class timesheet_steps_prasekmCGI {
 		
 		WebElement result = browser.findElement(By.xpath("//*[@id=\"PTNUI_LAND_WRK_GROUPBOX14$PIMG\"]/span[1]"));
 	
-// Assertion #1:		
+// Assertion type #1: check if the text is present on page		
 		String resultText = result.getText();
 		assertEquals(resultText, "PSA Finance");
 		
-// Assertion #2:
-//		assertTrue(result.isDisplayed());
-		
-// Assertion #3:	NEFUNGUJE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!	
-//		try {
-//			browser.findElement(By.xpath("//*[@id=\"PTNUI_LAND_WRK_GROUPBOX14$PIMG\"]/span[1]"));
-//			}
-//			catch (NoSuchElementException e) {
-//			throw new RuntimeException("The desired element is not displayed");
-//			}
-				
-//		Thread.sleep(2000);
+// Assertion type #2: gehc if the object is displayed on page
+		assertTrue(result.isDisplayed());		
 		
 	}
 
 
-	@Given("^User navigates to CGI Timesheet Reports$")
+	@When("^User navigates to CGI Timesheet Reports$")
 	public void user_navigates_to_CGI_Timesheet_Reports() throws Exception {
 		
 		WebDriver browser = DriverUtil.getDriver();
@@ -89,11 +76,10 @@ public class timesheet_steps_prasekmCGI {
 		String cgiTimeReportsTitle_Text = cgiTimeReportsTitle.getText();
 		assertEquals(cgiTimeReportsTitle_Text, "CGI Time Reports");
 		
-//		Thread.sleep(2000);
 	}
 	
 	
-	@Given("^User fill main time report details$")
+	@And("^User fill main time report details$")
 	public void user_fill_main_time_report_details(DataTable emplIDPeriodTable) throws Exception {
 		
 		WebDriver browser = DriverUtil.getDriver();
@@ -113,26 +99,19 @@ public class timesheet_steps_prasekmCGI {
 		input_periodEndDate.clear();
 		input_periodEndDate.sendKeys(periodEndDate);	
 				
-		
-//		Thread.sleep(2000);
-
 	}
 
-	@Given("^User creates a blank time report$")
+	@And("^User creates a blank time report$")
 	public void user_creates_a_blank_time_report() throws Exception {
 
 		WebDriver browser = DriverUtil.getDriver();
 		
 		WebElement addButton = browser.findElement(By.id("#ICSearch"));
 		addButton.click();
-		
-//		Thread.sleep(2000);
-		
+				
 		WebElement openBlankLink = browser.findElement(By.id("EX_ICLIENT_WRK_OK_PB"));
 		openBlankLink.click();
 		
-//		Thread.sleep(2000);
-
 //		Explicit Wait:		
 		WebDriverWait wait = new WebDriverWait(browser, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("EX_TIME_HDR_COMMENTS_LBL")));
@@ -146,7 +125,7 @@ public class timesheet_steps_prasekmCGI {
 	}
 	
 	
-	@Given("^User added comment: \"([^\"]*)\"$")
+	@And("^User added comment: \"([^\"]*)\"$")
 	public void user_added_comment(String commentText) throws Exception {
 
 		WebDriver browser = DriverUtil.getDriver();
@@ -158,7 +137,7 @@ public class timesheet_steps_prasekmCGI {
 	}
 
 	
-	@Given("^User fill project hours details$")
+	@And("^User fill project hours details$")
 	public void user_fill_project_hours_detail(DataTable projectTable) throws Exception {
 		
 		WebDriver browser = DriverUtil.getDriver();
@@ -183,82 +162,76 @@ public class timesheet_steps_prasekmCGI {
 		linkProject.click();
 		browser.switchTo().defaultContent();
 		
-		Thread.sleep(2000);
+		// waiting for the popup window to close
+		Wrappers.waitForElementToDisappear("//iframe[@title='Popup window']");
 		
 		
 		// change to the main iframe
 		WebElement mainIframe = browser.findElement(By.xpath("//iframe[@title='Main Content']"));
 		browser.switchTo().frame(mainIframe);
-				
+
+		
 		WebElement lookUpActivityIcon = browser.findElement(By.id("ACTIVITY_CODE$prompt$img$0"));
 		lookUpActivityIcon.click();
 
-		Thread.sleep(2000);
-		
 		browser.switchTo().defaultContent();
 		popupIframe = browser.findElement(By.xpath("//iframe[@title='Popup window']"));
 		browser.switchTo().frame(popupIframe);
 		
-		Thread.sleep(2000);
 		
 		// select activity
 		WebElement linkActivity = browser.findElement(By.xpath("//table[@id='PTSRCHRESULTS']//a[text()='" + activity + "']"));
 		linkActivity.click();
 		browser.switchTo().defaultContent();
 		
-		Thread.sleep(2000);
+		// waiting for the popup window to close
+		Wrappers.waitForElementToDisappear("//iframe[@title='Popup window']");
+		
 		
 		// change to the main iframe
 		mainIframe = browser.findElement(By.xpath("//iframe[@title='Main Content']"));
 		browser.switchTo().frame(mainIframe);
-		
 
-		
-		
-		
-		
-//		WebElement input_project = browser.findElement(By.id("PROJECT_CODE$0"));
-//		input_project.clear();
-//		input_project.sendKeys(project);
-//		input_project.sendKeys(Keys.ENTER);		
-//		Thread.sleep(2000);
 
-//		explicit Wait:
-//		WebDriverWait wait = new WebDriverWait(browser, 10);
-//		wait.until(ExpectedConditions.elementToBeClickable(By.id("TIME2$0")));
 
+		WebElement input_monday = browser.findElement(By.id("TIME2$0"));
+		input_monday.clear();
+		input_monday.sendKeys(monday);
 		
-//// Activity "3" je pro 2019 zatim neplatna	
-//		WebElement input_activity = browser.findElement(By.id("ACTIVITY_CODE$0"));
-//		input_activity.clear();
-//		input_activity.sendKeys(activity);
-//	
-//				
-//		WebElement input_monday = browser.findElement(By.id("TIME2$0"));
-//		input_monday.clear();
-//		input_monday.sendKeys(monday);
-//		
-//		WebElement input_tuesday = browser.findElement(By.id("TIME3$0"));
-//		input_tuesday.clear();
-//		input_tuesday.sendKeys(tuesday);
-//		
-//		WebElement input_wednesday = browser.findElement(By.id("TIME4$0"));
-//		input_wednesday.clear();
-//		input_wednesday.sendKeys(wednesday);
-//		
-//		WebElement input_thursday = browser.findElement(By.id("TIME5$0"));
-//		input_thursday.clear();
-//		input_thursday.sendKeys(thursday);
-//		
-//		WebElement input_friday = browser.findElement(By.id("TIME6$0"));
-//		input_friday.clear();
-//		input_friday.sendKeys(friday);
+		WebElement input_tuesday = browser.findElement(By.id("TIME3$0"));
+		input_tuesday.clear();
+		input_tuesday.sendKeys(tuesday);
+		
+		WebElement input_wednesday = browser.findElement(By.id("TIME4$0"));
+		input_wednesday.clear();
+		input_wednesday.sendKeys(wednesday);
+		
+		WebElement input_thursday = browser.findElement(By.id("TIME5$0"));
+		input_thursday.clear();
+		input_thursday.sendKeys(thursday);
+		
+		WebElement input_friday = browser.findElement(By.id("TIME6$0"));
+		input_friday.clear();
+		input_friday.sendKeys(friday);
 		
 			
 	}
 
 	
-	@Given("^User fills non-project hours detail$")
+	@And("^User add attachments$")
+	public void user_add_attachments(DataTable attachmentsTable) throws Exception {
+
+		WebDriver browser = DriverUtil.getDriver();
+		
+		
+		
+		
+		Thread.sleep(10000);
+		
+	}
+	
+	
+	@And("^User fills non-project hours detail$")
 	public void user_fills_non_project_hours_detail(DataTable nonProjectTable) throws Exception {
 		
 		WebDriver browser = DriverUtil.getDriver();
@@ -266,11 +239,9 @@ public class timesheet_steps_prasekmCGI {
 		WebElement hyperlink_viewAll = browser.findElement(By.id("EX_TRC_MAP_VW$hviewall$0"));
 		hyperlink_viewAll.click();
 
-		Thread.sleep(5000);
-
-////		Explicit Wait:		
-//		WebDriverWait wait = new WebDriverWait(browser, 10);
-//		wait.until(ExpectedConditions.elementToBeClickable(By.id("POL_TIME2$5")));
+//		Explicit Wait:		
+		WebDriverWait wait = new WebDriverWait(browser, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("POL_TIME2$5")));
 		
 		
 		List<List<String>> data = nonProjectTable.raw();
@@ -291,7 +262,7 @@ public class timesheet_steps_prasekmCGI {
 	    }
 		
 		
-		Thread.sleep(15000);
+		Thread.sleep(5000);
 	
 		
 	}
