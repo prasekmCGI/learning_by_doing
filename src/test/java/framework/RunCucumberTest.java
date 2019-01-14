@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 	plugin = {"pretty"},
 	features = "src/test/java/features",
 	glue = {"steps"},
-	tags = {"@timesheet"}
+	tags = {"@timesheetmatej"}
 	)
 
 public class RunCucumberTest {

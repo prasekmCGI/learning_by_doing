@@ -2,6 +2,7 @@ package steps;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 //import java.util.ArrayList;
 import java.util.List;
 
@@ -17,24 +18,29 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import framework.DriverUtil;
 import framework.Wrappers;
+import framework.Helpers;
 
 
 public class timesheet_steps_matejzoldak {
 	
 	@Given("^User is logged in the timesheet application with specified credentails$")
-	public void user_is_logged_in_the_timesheet_application_with_specified_credentails(DataTable credentialsTable) throws Exception {
+	public void user_is_logged_in_the_timesheet_application_with_specified_credentails() throws Exception {
+		
+//		GET CLASSIFIED INFO
+		ArrayList<String> classifiedInfo = Helpers.getClassifiedInformation();
+		
+//		GET DATA FROM CLASSIFIED FILE
+		String URL = classifiedInfo.get(0);
+		String username = classifiedInfo.get(1);
+		String password = classifiedInfo.get(2);
 		
 //		NAVIGATE TO LOGIN PAGE
 		WebDriver browser = DriverUtil.getDriver();
-		browser.get(".....");
-		
-		
-//		GET the credential data from scenarios
-		List<List<String>> data = credentialsTable.raw();
+		browser.get(URL);
 		
 //		find elements and add the credentials
-		browser.findElement(By.id("userid")).sendKeys(data.get(1).get(0)); 
-	    browser.findElement(By.id("pwd")).sendKeys(data.get(1).get(1));
+		browser.findElement(By.id("userid")).sendKeys(username); 
+	    browser.findElement(By.id("pwd")).sendKeys(password);
 	    browser.findElement(By.name("Submit")).click();
 	    
 //	    VALIDATION
