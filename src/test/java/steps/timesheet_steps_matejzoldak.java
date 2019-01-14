@@ -3,7 +3,6 @@ package steps;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-//import java.util.ArrayList;
 import java.util.List;
 
 //import org.apache.http.annotation.ThreadSafe;
@@ -30,13 +29,13 @@ public class timesheet_steps_matejzoldak {
 		ArrayList<String> classifiedInfo = Helpers.getClassifiedInformation();
 		
 //		GET DATA FROM CLASSIFIED FILE
-		String URL = classifiedInfo.get(0);
+		String url = classifiedInfo.get(0);
 		String username = classifiedInfo.get(1);
 		String password = classifiedInfo.get(2);
 		
 //		NAVIGATE TO LOGIN PAGE
 		WebDriver browser = DriverUtil.getDriver();
-		browser.get(URL);
+		browser.get(url);
 		
 //		find elements and add the credentials
 		browser.findElement(By.id("userid")).sendKeys(username); 
