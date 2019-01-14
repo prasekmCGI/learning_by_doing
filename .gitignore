@@ -1,9 +1,10 @@
-# folders
+# ignored folders
 .metadata/
 .settings/
 target/
 
-# files
+# ignored files
 .classpath
 .project
 *.log
+src/test/java/binaries/classified.txt

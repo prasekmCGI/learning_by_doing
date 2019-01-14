@@ -2,9 +2,7 @@ Feature: Timesheet creation
    
    @timesheet 
    Scenario: User should be able to submit a new timesheet
-	   Given User is logged in the timesheet application with specified credentails
-	   | Timesheet Url * | Username * | Password * |
-	   |                 |            |            | 
+	   Given User is logged in the timesheet application
 	   When User navigates to CGI Timesheet Reports
 	   And User fill main time report details
 	   | Empl ID *   | Period End Date * |
